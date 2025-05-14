@@ -51,22 +51,19 @@ If you have Docker installed, you can run the application in the container with 
 docker-compose up --build
 ```
 
-## 💬 Contribute
-
-### Contributors
+## 💬 Contributors
 
 <div style="display: flex; justify-content: space-between;">
   <a href="https://github.com/BatuhanARK">
-    <img src="https://github.com/BatuhanARK.png" width="100" height="100" style="border-radius: 50%;" />
+    <img src="https://github.com/BatuhanARK.png" width="100" height="100" style="border-radius: 50%; object-fit: cover;" />
   </a>
   <a href="https://github.com/ceyda125">
-    <img src="https://github.com/ceyda125.png" width="100" height="100" style="border-radius: 50%;" />
+    <img src="https://github.com/ceyda125.png" width="100" height="100" style="border-radius: 50%; object-fit: cover;" />
   </a>
   <a href="https://github.com/sldrdm">
-    <img src="https://github.com/sldrdm.png" width="100" height="100" style="border-radius: 50%;" />
+    <img src="https://github.com/sldrdm.png" width="100" height="100" style="border-radius: 50%; object-fit: cover;" />
   </a>
 </div>
-
 
 ---
 
