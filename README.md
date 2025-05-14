@@ -53,7 +53,12 @@ docker-compose up --build
 
 ## 💬 Contribute
 
-The project is not open source, but if you want to contribute with your suggestions and feedback, you can contact us.
+<a href = "https://github.com/BatuhanARK/LMS-CC/graphs/contributors">
+  <img src = "https://contrib.rocks/image?repo = BatuhanARK/LMS-CC"/>
+</a>
+
+Made with [contributors-img](https://contrib.rocks).
+
 
 ---
 
