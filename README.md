@@ -69,19 +69,7 @@ docker-compose up --build
   </a>
 </div>
 
-<div style="display: flex; justify-content: space-between;">
-  <a href="https://github.com/BatuhanARK" style="text-decoration: none;">
-    <strong>@BatuhanARK</strong>
-  </a>
-  
-  <a href="https://github.com/ceyda125" style="text-decoration: none;">
-    <strong>@ceyda125&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
-  </a>
-
-  <a href="https://github.com/sldrdm" style="text-decoration: none;">
-    <strong>@sldrdm</strong>
-  </a>
-</div>
+[@BatuhanARK](https://github.com/BatuhanARK) [@ceyda125](https://github.com/ceyda125) [@sldrdm](https://github.com/sldrdm)
 
 ---
 
