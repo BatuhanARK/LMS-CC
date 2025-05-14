@@ -54,10 +54,9 @@ docker-compose up --build
 ## 💬 Contribute
 
 <a href = "https://github.com/BatuhanARK/LMS-CC/graphs/contributors">
-  <img src = "https://contrib.rocks/image?repo = BatuhanARK/LMS-CC"/>
+  <img src = "https://contrib.rocks/image?repo = BatuhanARK/WQUIZ"/>
 </a>
 
-Made with [contributors-img](https://contrib.rocks).
 
 
 ---
