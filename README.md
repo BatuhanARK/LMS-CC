@@ -55,13 +55,13 @@ docker-compose up --build
 
 <div style="display: flex; justify-content: space-between;">
   <a href="https://github.com/BatuhanARK">
-    <img src="https://github.com/BatuhanARK.png" width="100" height="100" style="border-radius: 50%; object-fit: cover;" />
+    <img class="rounded-circle shadow-4-strong" src="https://github.com/BatuhanARK.png" />
   </a>
   <a href="https://github.com/ceyda125">
-    <img src="https://github.com/ceyda125.png" width="100" height="100" style="border-radius: 50%; object-fit: cover;" />
+    <img class="rounded-circle shadow-4-strong" src="https://github.com/ceyda125.png"/>
   </a>
   <a href="https://github.com/sldrdm">
-    <img src="https://github.com/sldrdm.png" width="100" height="100" style="border-radius: 50%; object-fit: cover;" />
+    <img class="rounded-circle shadow-4-strong" src="https://github.com/sldrdm.png" />
   </a>
 </div>
 
