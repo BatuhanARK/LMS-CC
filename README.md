@@ -73,7 +73,7 @@ docker-compose up --build
   </a>
   
   <a href="https://github.com/ceyda125" style="text-decoration: none;">
-    <strong>@ceyda125  </strong>
+    <strong>@ceyda125&nbsp;</strong>
   </a>
 
   <a href="https://github.com/sldrdm" style="text-decoration: none;">
