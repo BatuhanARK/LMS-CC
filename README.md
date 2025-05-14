@@ -53,7 +53,17 @@ docker-compose up --build
 
 ## 💬 Contribute
 
-[![Contributors](https://contrib.rocks/image?repo=BatuhanARK/LMS-CC)](https://github.com/BatuhanARK/LMS-CC/graphs/contributors)
+### Contributors
+
+- [@BatuhanARK](https://github.com/BatuhanARK)
+- [@ceyda125](https://github.com/ceyda125)
+- [@sldrdm](https://github.com/sldrdm)
+
+Ve her birinin profil resmini şu şekilde gösterebilirsiniz:
+
+[<img src="https://github.com/BatuhanARK.png" width="50"/>](https://github.com/BatuhanARK)  
+[<img src="https://github.com/ceyda125.png" width="50"/>](https://github.com/ceyda125)  
+[<img src="https://github.com/sldrdm.png" width="50"/>](https://github.com/sldrdm)
 
 
 
