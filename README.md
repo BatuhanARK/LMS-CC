@@ -53,7 +53,7 @@ docker-compose up --build
 
 ## 💬 Contributors
 
-<div style="display: flex; justify-content: space-around; align-items: center;">
+<div style="display: flex; justify-content: space-between; align-items: center;">
   <div style="text-align: center;">
     <a href="https://github.com/BatuhanARK">
       <img src="https://github.com/BatuhanARK.png" width="100" height="100" style="border-radius: 50%; object-fit: cover;" />
@@ -61,7 +61,6 @@ docker-compose up --build
       <strong>@BatuhanARK</strong>
     </a>
   </div>
-  
   <div style="text-align: center;">
     <a href="https://github.com/ceyda125">
       <img src="https://github.com/ceyda125.png" width="100" height="100" style="border-radius: 50%; object-fit: cover;" />
@@ -69,7 +68,6 @@ docker-compose up --build
       <strong>@ceyda125</strong>
     </a>
   </div>
-
   <div style="text-align: center;">
     <a href="https://github.com/sldrdm">
       <img src="https://github.com/sldrdm.png" width="100" height="100" style="border-radius: 50%; object-fit: cover;" />
@@ -77,7 +75,7 @@ docker-compose up --build
       <strong>@sldrdm</strong>
     </a>
   </div>
-</div>
+</div
 
 ---
 
