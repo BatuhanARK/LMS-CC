@@ -66,7 +66,6 @@ docker-compose up --build
 
   <a href="https://github.com/sldrdm" style="text-decoration: none; ">
     <img src="https://github.com/sldrdm.png" width="100" height="100" style="border-radius: 50%; object-fit: cover;" />
-    <strong>&nbsp;</strong>
   </a>
 </div>
 
@@ -76,7 +75,7 @@ docker-compose up --build
   </a>
   
   <a href="https://github.com/ceyda125" style="text-decoration: none;">
-    <strong>@ceyda125&nbsp;</strong>
+    <strong>@ceyda125&nbsp;&nbsp;&nbsp;&nbsp;</strong>
   </a>
 
   <a href="https://github.com/sldrdm" style="text-decoration: none;">
