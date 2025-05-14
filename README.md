@@ -53,21 +53,21 @@ docker-compose up --build
 
 ## 💬 Contributors
 
-<div style="display: flex; justify-content: space-between; gap: 10px;">
-  <a href="https://github.com/BatuhanARK" style="text-decoration: none;">
+<div style="display: flex; justify-content: space-between;">
+  <a href="https://github.com/BatuhanARK" style="text-decoration: none; margin-right: 30px;">
     <img src="https://github.com/BatuhanARK.png" width="100" height="100" style="border-radius: 50%; object-fit: cover;" />
   </a>
   
-  <a href="https://github.com/ceyda125" style="text-decoration: none;">
+  <a href="https://github.com/ceyda125" style="text-decoration: none; margin-right: 30px;">
     <img src="https://github.com/ceyda125.png" width="100" height="100" style="border-radius: 50%; object-fit: cover;" />
   </a>
 
-  <a href="https://github.com/sldrdm" style="text-decoration: none;">
+  <a href="https://github.com/sldrdm" style="text-decoration: none; margin-right: 30px;">
     <img src="https://github.com/sldrdm.png" width="100" height="100" style="border-radius: 50%; object-fit: cover;" />
   </a>
 </div>
 
-<div style="display: flex; justify-content: space-between; gap: 10px;">
+<div style="display: flex; justify-content: space-between;">
   <a href="https://github.com/BatuhanARK" style="text-decoration: none;">
     <strong>@BatuhanARK</strong>
   </a>
