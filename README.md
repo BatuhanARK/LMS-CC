@@ -69,7 +69,7 @@ docker-compose up --build
   </a>
 </div>
 
-[@BatuhanARK](https://github.com/BatuhanARK) &nbsp;&nbsp;[@ceyda125](https://github.com/ceyda125) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[@sldrdm](https://github.com/sldrdm)
+[@BatuhanARK](https://github.com/BatuhanARK) &nbsp;&nbsp;[@ceyda125](https://github.com/ceyda125) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[@sldrdm](https://github.com/sldrdm)
 
 ---
 
