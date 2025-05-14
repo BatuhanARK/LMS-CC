@@ -76,7 +76,7 @@ docker-compose up --build
     <strong>@ceyda125</strong>
   </a>
 
-  <span>&nbsp;&nbsp;</span> <!-- 2 boşluk -->
+  <p>  </p>
 
   <a href="https://github.com/sldrdm">
     <strong>@sldrdm</strong>
