@@ -53,7 +53,7 @@ docker-compose up --build
 
 ## 💬 Contributors
 
-<div style="display: flexbox; justify-content: space-between; gap: 5px;">
+<div style="display: flex; justify-content: space-around; align-items: center;">
   <div style="text-align: center;">
     <a href="https://github.com/BatuhanARK">
       <img src="https://github.com/BatuhanARK.png" width="100" height="100" style="border-radius: 50%; object-fit: cover;" />
