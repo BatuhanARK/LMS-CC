@@ -55,9 +55,17 @@ docker-compose up --build
 
 ### Contributors
 
-[<img src="https://github.com/BatuhanARK.png" width="100" style="border-radius:50%; margin-right:10px"/>](https://github.com/BatuhanARK)  
-[<img src="https://github.com/ceyda125.png" width="100" style="border-radius:50%; margin-right:10px"/>](https://github.com/ceyda125)  
-[<img src="https://github.com/sldrdm.png" width="100" style="border-radius:50%"/>](https://github.com/sldrdm)
+<div style="display: flex; justify-content: space-between;">
+  <a href="https://github.com/BatuhanARK">
+    <img src="https://github.com/BatuhanARK.png" width="100" style="border-radius: 50%;" />
+  </a>
+  <a href="https://github.com/ceyda125">
+    <img src="https://github.com/ceyda125.png" width="100" style="border-radius: 50%;" />
+  </a>
+  <a href="https://github.com/sldrdm">
+    <img src="https://github.com/sldrdm.png" width="100" style="border-radius: 50;" />
+  </a>
+</div>
 
 
 ---
