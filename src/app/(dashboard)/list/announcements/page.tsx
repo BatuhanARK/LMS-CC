@@ -92,16 +92,22 @@ const AnnouncementListPage = async ({
 
   const roleConditions = {
     teacher: { lessons: { some: { teacherId: currentUserId! } } },
-    student: { students: { some: { id: currentUserId! } } },
-    parent: { students: { some: { parentId: currentUserId! } } },
+    student: { students: { some: { id: currentUserId! } } }
   };
 
-  query.OR = [
-    { classId: null },
-    {
-      class: roleConditions[role as keyof typeof roleConditions] || {},
-    },
-  ];
+  if (role === "admin") {
+  } else if (role === "teacher") {
+    query.OR = [
+      { targetAudience: "TEACHERS" },
+      { targetAudience: "ALL" },
+    ];
+  } else if (role === "student") {
+    query.OR = [
+      { targetAudience: "STUDENTS" },
+      { targetAudience: "ALL" },
+    ];
+  }
+
 
   const [data, count] = await prisma.$transaction([
     prisma.announcement.findMany({

@@ -7,6 +7,7 @@ import { ITEM_PER_PAGE } from "@/lib/settings";
 import { Class, Event, Prisma } from "@prisma/client";
 import Image from "next/image";
 import { auth } from "@clerk/nextjs/server";
+import { Audience } from "@prisma/client";
 
 type EventList = Event & { class: Class };
 
@@ -18,7 +19,6 @@ const EventListPage = async ({
 
   const { userId, sessionClaims } = auth();
   const role = (sessionClaims?.metadata as { role?: string })?.role;
-  const currentUserId = userId;
 
   const columns = [
     {
@@ -115,18 +115,14 @@ const EventListPage = async ({
 
   // ROLE CONDITIONS
 
-  const roleConditions = {
-    teacher: { lessons: { some: { teacherId: currentUserId! } } },
-    student: { students: { some: { id: currentUserId! } } },
-    parent: { students: { some: { parentId: currentUserId! } } },
-  };
+  if (role !== "admin") {
+    const userAudience: Audience = role === "student" ? Audience.STUDENTS : Audience.TEACHERS;
 
-  query.OR = [
-    { classId: null },
-    {
-      class: roleConditions[role as keyof typeof roleConditions] || {},
-    },
-  ];
+    query.targetAudience = {
+      in: [Audience.ALL, userAudience],
+    };
+  }
+
 
   const [data, count] = await prisma.$transaction([
     prisma.event.findMany({
@@ -165,5 +161,4 @@ const EventListPage = async ({
     </div>
   );
 };
-
 export default EventListPage;
