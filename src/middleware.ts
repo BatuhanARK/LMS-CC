@@ -1,4 +1,4 @@
-import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { clerkClient, clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { routeAccessMap } from "./lib/settings";
 import { NextResponse } from "next/server";
 
@@ -7,20 +7,27 @@ const matchers = Object.keys(routeAccessMap).map((route) => ({
   allowedRoles: routeAccessMap[route],
 }));
 
-console.log(matchers);
-
-export default clerkMiddleware((auth, req) => {
-  // if (isProtectedRoute(req)) auth().protect()
-
+export default clerkMiddleware(async (auth, req) => {
+  const { userId } = auth();
+  if (!userId) return;
+  const client = clerkClient();
+  const user = await client.users.getUser(userId);
+  const role = user.publicMetadata?.role as string | undefined;
+  console.log("✅ Role from publicMetadata:", role);
   const { sessionClaims } = auth();
-
-  const role = (sessionClaims?.metadata as { role?: string })?.role;
-
   for (const { matcher, allowedRoles } of matchers) {
     if (matcher(req) && !allowedRoles.includes(role!)) {
-      return NextResponse.redirect(new URL(`/${role}`, req.url));
+      return NextResponse.redirect(new URL(`/${role ?? "unauthorized"}`, req.url));
     }
   }
+  //const role = (sessionClaims?.publicMetadata as { role?: string })?.role;
+  //console.log("user role:", role);
+  //console.log("Session claims:", sessionClaims);
+  //for (const { matcher, allowedRoles } of matchers) {
+  //  if (matcher(req) && !allowedRoles.includes(role!)) {
+  //    return NextResponse.redirect(new URL(`/${role}`, req.url));
+  //  }
+  //}
 });
 
 export const config = {

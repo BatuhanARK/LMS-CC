@@ -73,4 +73,4 @@ docker-compose up --build
 
 ---
 
-🛡️ This project was prepared for a school project.
+🛡️ This project was developed as part of a school assignment.

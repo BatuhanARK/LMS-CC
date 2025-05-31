@@ -65,7 +65,7 @@ const TeacherListPage = async ({
     >
       <td className="flex items-center gap-4 p-4">
         <Image
-          src={item.img || "/noAvatar.png"}
+          src={item.img ?? "/noAvatar.png"}
           alt=""
           width={40}
           height={40}
