@@ -92,7 +92,7 @@ const menuItems = [
       {
         icon: "/profile.png",
         label: "Profile",
-        href: "/profile",
+        href: "/profile", // Bu statik kalacak, dinamik olarak değiştireceğiz
         visible: ["admin", "teacher", "student"],
       },
       {
@@ -114,18 +114,23 @@ const menuItems = [
 const Menu = async () => {
   const user = await currentUser();
   const role = user?.publicMetadata.role as string;
+  const userId = user?.id;
+  
   return (
-    <div className="mt-4 text-sm">
-      {menuItems.map((i) => (
+    <div className="mt-4 text-sm h-full overflow-y-auto scrollbar-hide">
+      {menuItems.map((i, index) => (
         <div className="flex flex-col gap-2" key={i.title}>
-          <span className="hidden lg:block text-gray-400 font-light my-4">
-            {i.title}
-          </span>
+          {/* OTHER bölümü için ayırıcı çizgi ekle */}
+          {index === 1 && (
+            <div className="border-t border-gray-300 mb-2 mt-3 mx-2"></div>
+          )}
           {i.items.map((item) => {
             if (item.visible.includes(role)) {
+              const href = item.label === "Profile" ? `/list/teachers/${userId}` : item.href;
+              
               return (
                 <Link
-                  href={item.href}
+                  href={href}
                   key={item.label}
                   className="flex items-center justify-center lg:justify-start gap-4 text-gray-500 py-2 md:px-2 rounded-md hover:bg-lamaSkyLight"
                 >

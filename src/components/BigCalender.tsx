@@ -12,24 +12,33 @@ const BigCalendar = ({
 }: {
   data: { title: string; start: Date; end: Date }[];
 }) => {
+  const processedData = data.map(event => ({
+    ...event,
+    start: new Date(event.start.getTime() - (3 * 60 * 60 * 1000)),
+    end: new Date(event.end.getTime() - (3 * 60 * 60 * 1000))
+  }));
+  
   const [view, setView] = useState<View>(Views.WORK_WEEK);
 
   const handleOnChangeView = (selectedView: View) => {
     setView(selectedView);
   };
 
+  const firstEventDate = processedData.length > 0 ? processedData[0].start : new Date();
+
   return (
     <Calendar
       localizer={localizer}
-      events={data}
+      events={processedData}
       startAccessor="start"
       endAccessor="end"
       views={["work_week", "day"]}
       view={view}
-      style={{ height: "98%" }}
+      style={{ height: "500px" }}
       onView={handleOnChangeView}
-      min={new Date(2025, 1, 0, 8, 0, 0)}
-      max={new Date(2025, 1, 0, 17, 0, 0)}
+      defaultDate={firstEventDate}
+      min={new Date(2025, 0, 1, 8, 0, 0)}
+      max={new Date(2025, 0, 1, 17, 0, 0)}
     />
   );
 };
