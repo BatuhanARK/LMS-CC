@@ -31,10 +31,10 @@ npm i
 # prisma
 npm i prisma
 npx prisma init
-npx prisma migrate dev --name init  # You can change the "init" part to whatever you want to name it.
-npx prisma studio # You can open the localhost page in your browser and see the tables in the database.
+npx prisma migrate dev --name init  # You can change the "init" part to whatever you want to name it
+npx prisma studio # You can open the localhost page in your browser and see the tables in the db
 # run 
-npm run dev # You can open the localhost page in your browser.
+npm run dev # You can open the localhost page in your browser
 ```
 
 You can see the application by opening [http://localhost:3000](http://localhost:3000) in your browser.
