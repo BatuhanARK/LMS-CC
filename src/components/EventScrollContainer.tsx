@@ -31,7 +31,7 @@ const EventScrollContainer = ({ eventElements, totalEvents }: EventScrollContain
     );
   }
 
-  // Dinamik yükseklik hesaplama
+  // Dinamik yükseklik hesapb
   const visibleEventCount = Math.min(totalEvents, visibleCount);
   const containerHeight = visibleEventCount * 130 + (visibleEventCount - 1) * 16; // 130px event + 16px gap
 

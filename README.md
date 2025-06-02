@@ -1,6 +1,6 @@
 # 🚀 Modern Web Starter
 
-This project is a ready-made, flexible and scalable starter template for developing modern web applications. It is equipped with powerful technologies such as TypeScript, Next.js, TailwindCSS and Prisma.
+This project is a ready-made, flexible and scalable starter template for developing modern web applications. It is equipped with powerful technologies such as TypeScript, Next.js and Prisma.
 
 ## ✨ Features
 
@@ -15,34 +15,6 @@ This project is a ready-made, flexible and scalable starter template for develop
 
 Node.js and one of the package managers (npm, yarn, pnpm, bun) must be installed to run the project.
 
-### Start Development Server
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-You can see the application by opening [http://localhost:3000](http://localhost:3000) in your browser.
-
-## 🛠️ File Structure
-
-- `src/` – Application components and pages
-- `prisma/` – Database schema and migration files
-- `public/` – Static files
-- `app/` – Next.js page router directory
-
-## ⚙️ Configuration Files
-
-- `tsconfig.json` – TypeScript configuration
-- `tailwind.config.ts` – Tailwind CSS configuration
-- `next.config.mjs` – Next.js custom settings
-- `.eslintrc.json` – Linter rules
-
 ## 🐳 Running with Docker
 
 If you have Docker installed, you can run the application in the container with the following commands:
@@ -50,6 +22,36 @@ If you have Docker installed, you can run the application in the container with 
 ```bash
 docker-compose up --build
 ```
+
+### Start Development Server
+
+```bash
+# first install requirements
+npm i
+# prisma
+npm i prisma
+npx prisma init
+npx prisma migrate dev --name init  # You can change the "init" part to whatever you want to name it.
+npx prisma studio # You can open the localhost page in your browser and see the tables in the database.
+# run 
+npm run dev # You can open the localhost page in your browser.
+```
+
+You can see the application by opening [http://localhost:3000](http://localhost:3000) in your browser.
+
+## 🛠️ File Structure
+
+- `src/` – Application components and pages
+- `src/app/` – Next.js page router directory
+- `prisma/` – Database schema and migration files
+- `public/` – Static files
+
+## ⚙️ Configuration Files
+
+- `tsconfig.json` – TypeScript configuration
+- `tailwind.config.ts` – Tailwind CSS configuration
+- `next.config.mjs` – Next.js custom settings
+- `.eslintrc.json` – Linter rules
 
 ## 💬 Contributors
 

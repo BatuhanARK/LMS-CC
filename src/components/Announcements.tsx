@@ -29,7 +29,7 @@ const Announcements = async () => {
   // Announcement'ları render edilmiş JSX olarak hazırlayalım
   const announcementElements = data.map((announcement, index) => {
     // Farklı renkler için index'e göre stil belirleme
-    const bgColors = ["bg-lamaSkyLight", "bg-lamaPurpleLight", "bg-lamaYellowLight"];
+    const bgColors = ["bg-bSkyLight", "bg-bPurpleLight", "bg-bYellowLight"];
     const bgColor = bgColors[index % 3];
 
     return (

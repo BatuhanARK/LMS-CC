@@ -30,7 +30,7 @@ const EventList = async ({ dateParam }: { dateParam?: string }) => {
   // Event'leri render edilmiş JSX olarak hazırlayalım (boş array olsa bile)
   const eventElements = data.map((event) => (
     <div
-      className="p-5 rounded-md border-2 border-gray-100 border-t-4 odd:border-t-lamaSky even:border-t-lamaPurple h-[130px] flex-shrink-0"
+      className="p-5 rounded-md border-2 border-gray-100 border-t-4 odd:border-t-bSky even:border-t-bPurple h-[130px] flex-shrink-0"
       key={event.id}
     >
       <div className="flex items-center justify-between">
