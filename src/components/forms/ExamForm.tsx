@@ -6,14 +6,10 @@ import InputField from "../InputField";
 import {
   examSchema,
   ExamSchema,
-  subjectSchema,
-  SubjectSchema,
 } from "@/lib/formValidationSchemas";
 import {
   createExam,
-  createSubject,
   updateExam,
-  updateSubject,
 } from "@/lib/actions";
 import { useFormState } from "react-dom";
 import { Dispatch, SetStateAction, useEffect } from "react";
@@ -64,7 +60,7 @@ const ExamForm = ({
     }
   }, [state, router, type, setOpen]);
 
-  const { lessons } = relatedData;
+  const { lessons } = relatedData ?? { lessons: [] };
 
   return (
     <form className="flex flex-col gap-8" onSubmit={onSubmit}>
@@ -80,33 +76,7 @@ const ExamForm = ({
           register={register}
           error={errors?.title}
         />
-        <InputField
-          label="Start Date"
-          name="startTime"
-          defaultValue={data?.startTime}
-          register={register}
-          error={errors?.startTime}
-          type="datetime-local"
-        />
-        <InputField
-          label="End Date"
-          name="endTime"
-          defaultValue={data?.endTime}
-          register={register}
-          error={errors?.endTime}
-          type="datetime-local"
-        />
-        {data && (
-          <InputField
-            label="Id"
-            name="id"
-            defaultValue={data?.id}
-            register={register}
-            error={errors?.id}
-            hidden
-          />
-        )}
-        <div className="flex flex-col gap-2 w-full md:w-1/4">
+        <div className="flex flex-col gap-2 w-full md:w-[48%]">
           <label className="text-xs text-gray-500">Lesson</label>
           <select
             className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
@@ -125,6 +95,32 @@ const ExamForm = ({
             </p>
           )}
         </div>
+        <InputField
+          label="Start Date"
+          name="startTime"
+          defaultValue={data?.startTime ? new Date(data.startTime).toISOString().slice(0, 16) : ""}
+          register={register}
+          error={errors?.startTime}
+          type="datetime-local"
+        />
+        <InputField
+          label="End Date"
+          name="endTime"
+          defaultValue={data?.endTime ? new Date(data.endTime).toISOString().slice(0, 16) : ""}
+          register={register}
+          error={errors?.endTime}
+          type="datetime-local"
+        />
+        {data && (
+          <InputField
+            label="Id"
+            name="id"
+            defaultValue={data?.id}
+            register={register}
+            error={errors?.id}
+            hidden
+          />
+        )}
       </div>
       {state.error && (
         <span className="text-red-500">Something went wrong!</span>

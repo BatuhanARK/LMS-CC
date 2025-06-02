@@ -1,5 +1,5 @@
-// IMPORTANT! 
-// ONLY RUN THIS FILE IF THERE IS NO DATA IN THE DATABASE!
+// ! IMPORTANT! 
+// ! ONLY RUN THIS FILE IF THERE IS NO DATA IN THE DATABASE!
 
 
 // import { Day, PrismaClient, UserSex } from "@prisma/client";

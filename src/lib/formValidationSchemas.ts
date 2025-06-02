@@ -86,3 +86,32 @@ export const examSchema = z.object({
 });
 
 export type ExamSchema = z.infer<typeof examSchema>;
+
+export const eventSchema = z.object({
+  id: z.number().optional(),
+  title: z.string().min(1, "Title is required"),
+  description: z.string().min(1, "Description is required"),
+  startTime: z.string().min(1, "Start time is required"),
+  endTime: z.string().min(1, "End time is required"),
+  targetAudience: z.enum(["ALL", "TEACHERS", "STUDENTS"]),
+  classId: z
+    .union([z.string().min(1), z.literal("")])
+    .optional()
+    .transform((val) => (typeof val !== "string" || val === "" ? null : parseInt(val))),
+});
+
+export type EventSchema = z.infer<typeof eventSchema>;
+
+export const announcementSchema = z.object({
+  id: z.number().optional(),
+  title: z.string().min(1, "Title is required"),
+  description: z.string().min(1, "Description is required"),
+  date: z.string().min(1, "Date is required"),
+  targetAudience: z.enum(["ALL", "TEACHERS", "STUDENTS"]),
+  classId: z
+    .union([z.string().min(1), z.literal("")])
+    .optional()
+    .transform((val) => (typeof val !== "string" || val === "" ? null : parseInt(val))),
+});
+
+export type AnnouncementSchema = z.infer<typeof announcementSchema>;

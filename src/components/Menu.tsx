@@ -1,6 +1,7 @@
 import { currentUser } from "@clerk/nextjs/server";
 import Image from "next/image";
 import Link from "next/link";
+import LogoutButton from "./LogoutButton";
 
 const menuItems = [
   {
@@ -11,6 +12,13 @@ const menuItems = [
         label: "Home",
         href: "/",
         visible: ["admin", "teacher", "student"],
+      },
+      {
+        icon: "/live.png",
+        label: "Live",
+        href: "/live",
+        visible: ["admin", "teacher", "student"],
+        isDynamic: true,
       },
       {
         icon: "/teacher.png",
@@ -73,12 +81,6 @@ const menuItems = [
         visible: ["admin", "teacher", "student"],
       },
       {
-        icon: "/message.png",
-        label: "Messages",
-        href: "/list/messages",
-        visible: ["admin", "teacher", "student"],
-      },
-      {
         icon: "/announcement.png",
         label: "Announcements",
         href: "/list/announcements",
@@ -92,8 +94,8 @@ const menuItems = [
       {
         icon: "/profile.png",
         label: "Profile",
-        href: "/profile", // Bu statik kalacak, dinamik olarak değiştireceğiz
-        visible: ["admin", "teacher", "student"],
+        href: "/profile",
+        visible: ["teacher", "student"],
       },
       {
         icon: "/setting.png",
@@ -101,12 +103,7 @@ const menuItems = [
         href: "/settings",
         visible: ["admin", "teacher", "student"],
       },
-      {
-        icon: "/logout.png",
-        label: "Logout",
-        href: "/logout",
-        visible: ["admin", "teacher", "student"],
-      },
+      // Logout item'ı kaldırıldı, aşağıda ayrı component olarak eklenecek
     ],
   },
 ];
@@ -126,7 +123,19 @@ const Menu = async () => {
           )}
           {i.items.map((item) => {
             if (item.visible.includes(role)) {
-              const href = item.label === "Profile" ? `/list/teachers/${userId}` : item.href;
+              // Dinamik href hesaplama
+              let href = item.href;
+              
+              if (item.label === "Profile") {
+                if (role === "teacher") {
+                  href = `/list/teachers/${userId}`;
+                } else if (role === "student") {
+                  href = `/list/students/${userId}`;
+                }
+              } else if (item.label === "Live" && item.isDynamic) {
+                href = `/live/${role}`;
+              }
+
               
               return (
                 <Link
@@ -142,6 +151,11 @@ const Menu = async () => {
           })}
         </div>
       ))}
+      
+      {/* Logout Button - Ayrı component olarak */}
+      <div className="mt-2 mb-[5px]">
+        <LogoutButton />
+      </div>
     </div>
   );
 };

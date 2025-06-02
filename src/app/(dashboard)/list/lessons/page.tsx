@@ -37,6 +37,11 @@ const columns = [
     accessor: "teacher",
     className: "hidden md:table-cell",
   },
+  {
+    header: "Time Range",
+    accessor: "timeRange",
+    className: "hidden lg:table-cell",
+  },
   ...(role === "admin"
     ? [
         {
@@ -56,6 +61,15 @@ const renderRow = (item: LessonList) => (
     <td>{item.class.name}</td>
     <td className="hidden md:table-cell">
       {item.teacher.name + " " + item.teacher.surname}
+    </td>
+    <td className="hidden lg:table-cell">
+      {new Date(item.startTime).toLocaleTimeString('tr-TR', { 
+        hour: '2-digit', 
+        minute: '2-digit' 
+      })} - {new Date(item.endTime).toLocaleTimeString('tr-TR', { 
+        hour: '2-digit', 
+        minute: '2-digit' 
+      })}
     </td>
     <td>
       <div className="flex items-center gap-2">

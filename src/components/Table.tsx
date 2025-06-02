@@ -11,8 +11,8 @@ const Table = ({
     <table className="w-full mt-4">
       <thead>
         <tr className="text-left text-gray-500 text-sm">
-          {columns.map((col) => (
-            <th key={col.accessor} className={col.className}>{col.header}</th>
+          {columns.map((col, index) => (
+            <th key={col.accessor} className={`${index === 0 ? 'p-4' : ''} ${col.className || ""}`}>{col.header}</th>
           ))}
         </tr>
       </thead>

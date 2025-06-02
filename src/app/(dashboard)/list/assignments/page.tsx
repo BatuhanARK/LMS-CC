@@ -1,4 +1,4 @@
-import FormModal from "@/components/FormModal";
+import FormContainer from "@/components/FormContainer";
 import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
@@ -33,6 +33,10 @@ const AssignmentListPage = async ({
       accessor: "name",
     },
     {
+      header: "Title",
+      accessor: "title",
+    },
+    {
       header: "Class",
       accessor: "class",
     },
@@ -62,6 +66,7 @@ const AssignmentListPage = async ({
       className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-bPurpleLight"
     >
       <td className="flex items-center gap-4 p-4">{item.lesson.subject.name}</td>
+      <td>{item.title}</td>
       <td>{item.lesson.class.name}</td>
       <td className="hidden md:table-cell">
         {item.lesson.teacher.name + " " + item.lesson.teacher.surname}
@@ -73,8 +78,8 @@ const AssignmentListPage = async ({
         <div className="flex items-center gap-2">
           {(role === "admin" || role === "teacher") && (
             <>
-              <FormModal table="assignment" type="update" data={item} />
-              <FormModal table="assignment" type="delete" id={item.id} />
+              <FormContainer table="assignment" type="update" data={item} />
+              <FormContainer table="assignment" type="delete" id={item.id} />
             </>
           )}
         </div>
@@ -168,10 +173,9 @@ const AssignmentListPage = async ({
             <button className="w-8 h-8 flex items-center justify-center rounded-full bg-bYellow">
               <Image src="/sort.png" alt="" width={14} height={14} />
             </button>
-            {role === "admin" ||
-              (role === "teacher" && (
-                <FormModal table="assignment" type="create" />
-              ))}
+            {(role === "admin" || role === "teacher") && (
+                <FormContainer table="assignment" type="create" />
+              )}
           </div>
         </div>
       </div>
