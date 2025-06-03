@@ -8,6 +8,7 @@ import Image from "next/image";
 import { auth } from "@clerk/nextjs/server";
 import { Attendance, Prisma } from "@prisma/client";
 import Link from "next/link";
+import { redirect } from 'next/navigation';
 
 
 type AttendanceList = {
@@ -46,7 +47,7 @@ const AttendanceListPage = async ({
             ? [{ header: "Actions", accessor: "action", className: "pl-4 w-1/10" }]
             : []),
     ];
-
+    
     const renderRow = (item: AttendanceList) => {
         // URL parametrelerini temizle ve attendanceId ekle
         const currentParams = new URLSearchParams();
@@ -164,7 +165,9 @@ const AttendanceListPage = async ({
 
     // Seçili attendance'ı getir
     let selectedAttendances: AttendanceList[] = [];
-    if (searchParams.studentId && !attendanceId) {
+    if (searchParams.studentId) {
+        console.log("SHOW MODAL?", searchParams.studentId, attendanceId)
+        console.log("Incoming StudentId:", searchParams.studentId);
         const studentAttendances = await prisma.attendance.findMany({
             where: { studentId: searchParams.studentId },
             include: {
@@ -193,7 +196,7 @@ const AttendanceListPage = async ({
     // Modal kapatma URL'i oluştur
     const closeModalParams = new URLSearchParams();
     Object.entries(searchParams).forEach(([key, value]) => {
-        if (value !== undefined && key !== 'attendanceId') {
+        if (value !== undefined && key !== 'studentId') {
             closeModalParams.set(key, value);
         }
     });

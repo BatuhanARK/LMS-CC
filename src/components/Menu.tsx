@@ -100,7 +100,7 @@ const menuItems = [
       {
         icon: "/setting.png",
         label: "Settings",
-        href: "/settings",
+        href: "/list/settings",
         visible: ["admin", "teacher", "student"],
       },
       // Logout item'ı kaldırıldı, aşağıda ayrı component olarak eklenecek
