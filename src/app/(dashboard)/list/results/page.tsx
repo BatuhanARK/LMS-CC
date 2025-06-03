@@ -85,7 +85,7 @@ const renderRow = (item: ResultList) => (
     </td>
     <td className="hidden md:table-cell">{item.className}</td>
     <td className="hidden md:table-cell">
-      {new Intl.DateTimeFormat("en-US").format(item.startTime)}
+      {new Intl.DateTimeFormat("tr-TR").format(item.startTime)}
     </td>
     <td>
       <div className="flex items-center gap-2">
@@ -180,7 +180,7 @@ const renderRow = (item: ResultList) => (
   ]);
 
   const data = dataRes.map((item) => {
-    const assessment = item.exam || item.assignment;
+    const assessment = item.exam ?? item.assignment;
 
     if (!assessment) return null;
 

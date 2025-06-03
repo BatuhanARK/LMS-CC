@@ -84,9 +84,10 @@ const AttendanceForm = ({
           error={errors?.date}
         />
 
-        <div className="flex flex-col gap-2 w-full md:w-1/4">
-          <label className="text-xs text-gray-500">Student</label>
+        <div className="flex flex-col gap-2 w-full md:w-[48%]">
+          <label htmlFor="studentId" className="text-xs text-gray-500">Student</label>
           <select
+            id="studentId"
             className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
             {...register("studentId")}
             defaultValue={data?.studentId}
@@ -103,9 +104,10 @@ const AttendanceForm = ({
           )}
         </div>
 
-        <div className="flex flex-col gap-2 w-full md:w-1/4">
-          <label className="text-xs text-gray-500">Lesson</label>
+        <div className="flex flex-col gap-2 w-full md:w-[48%]">
+          <label htmlFor="lessonId" className="text-xs text-gray-500">Lesson</label>
           <select
+            id="lessonId"
             className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
             {...register("lessonId")}
             defaultValue={data?.lessonId}
@@ -122,9 +124,10 @@ const AttendanceForm = ({
           )}
         </div>
 
-        <div className="flex flex-col gap-2 w-full md:w-1/4">
-          <label className="text-xs text-gray-500">Attendance Status</label>
+        <div className="flex flex-col gap-2 w-full md:w-[48%]">
+          <label htmlFor="present" className="text-xs text-gray-500">Attendance Status</label>
           <select
+            id="present"
             className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
             {...register("present")}
             defaultValue={data?.present ? "true" : "false"}

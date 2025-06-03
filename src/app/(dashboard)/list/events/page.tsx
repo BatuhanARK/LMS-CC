@@ -20,6 +20,7 @@ const EventListPage = async ({
 
   const { userId, sessionClaims } = auth();
   const role = (sessionClaims?.metadata as { role?: string })?.role;
+  const currentUserId = userId;
 
   const columns = [
     {
@@ -49,12 +50,12 @@ const EventListPage = async ({
     },
     ...(role === "admin"
       ? [
-          {
-            header: "Actions",
-            accessor: "action",
-            className: "w-1/12",
-          },
-        ]
+        {
+          header: "Actions",
+          accessor: "action",
+          className: "w-1/12",
+        },
+      ]
       : []),
   ];
 
@@ -69,29 +70,23 @@ const EventListPage = async ({
     currentParams.set('eventId', item.id.toString());
 
     return (
-      <tr
-        key={item.id}
-        className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-bPurpleLight"
-      >
+      <tr key={item.id} className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-bPurpleLight">
         <td className="p-4 w-1/6 ">
-          <Link 
-            href={`/list/events?${currentParams.toString()}`}
-            className="block cursor-pointer"
-          >
-            <div className="font-medium">{item.title.length >25
-              ? `${item.title.substring(0,25)}...`
+          <Link href={`/list/events?${currentParams.toString()}`} className="block cursor-pointer">
+            <div className="font-medium">{item.title.length > 25
+              ? `${item.title.substring(0, 25)}...`
               : item.title}
             </div>
           </Link>
         </td>
         <td className="p-4 w-1/3 ">
-          <Link 
+          <Link
             href={`/list/events?${currentParams.toString()}`}
             className="block cursor-pointer"
           >
             <div className="text-xs text-gray-500">
-              {item.description && item.description.length > 100 
-                ? `${item.description.substring(0, 100)}...` 
+              {item.description && item.description.length > 100
+                ? `${item.description.substring(0, 100)}...`
                 : item.description || "No description"}
             </div>
           </Link>
@@ -100,7 +95,7 @@ const EventListPage = async ({
         <td className="hidden md:table-cell w-1/6">
           {new Intl.DateTimeFormat("tr-TR", {
             day: "2-digit",
-            month: "2-digit", 
+            month: "2-digit",
             year: "numeric",
             timeZone: "UTC"
           }).format(item.startTime)}, {new Intl.DateTimeFormat("tr-TR", {
@@ -229,24 +224,22 @@ const EventListPage = async ({
               <Link
                 href={closeModalUrl}
                 className="text-gray-400 hover:text-gray-600 text-2xl font-light"
-              >
-                ×
-              </Link>
+              >⊗</Link>
             </div>
-            
+
             {/* Modal Body */}
             <div className="p-6 space-y-4">
               <div>
                 <span className="font-semibold text-gray-700">Class: </span>
                 <span className="text-gray-800">{selectedEvent.class?.name || "No class assigned"}</span>
               </div>
-              
+
               <div>
                 <span className="font-semibold text-gray-700">Start Time: </span>
                 <span className="text-gray-800">
                   {new Intl.DateTimeFormat("tr-TR", {
                     day: "2-digit",
-                    month: "2-digit", 
+                    month: "2-digit",
                     year: "numeric",
                     hour: "2-digit",
                     minute: "2-digit",
@@ -255,14 +248,14 @@ const EventListPage = async ({
                   }).format(selectedEvent.startTime)}
                 </span>
               </div>
-              
+
               <div>
                 <span className="font-semibold text-gray-700">End Time: </span>
                 <span className="text-gray-800">
                   {new Intl.DateTimeFormat("tr-TR", {
                     day: "2-digit",
                     month: "2-digit",
-                    year: "numeric", 
+                    year: "numeric",
                     hour: "2-digit",
                     minute: "2-digit",
                     hour12: false,
@@ -270,7 +263,7 @@ const EventListPage = async ({
                   }).format(selectedEvent.endTime)}
                 </span>
               </div>
-              
+
               <div>
                 <span className="font-semibold text-gray-700">Description: </span>
                 <p className="mt-2 text-gray-700 leading-relaxed">
@@ -278,7 +271,7 @@ const EventListPage = async ({
                 </p>
               </div>
             </div>
-            
+
             {/* Modal Footer */}
             <div className="p-6 border-t border-gray-200">
               <Link

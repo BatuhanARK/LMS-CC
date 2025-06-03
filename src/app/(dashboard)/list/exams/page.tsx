@@ -72,7 +72,7 @@ const renderRow = (item: ExamList) => (
       {item.lesson.teacher.name + " " + item.lesson.teacher.surname}
     </td>
     <td className="hidden md:table-cell">
-      {new Intl.DateTimeFormat("en-US").format(item.startTime)}
+      {new Intl.DateTimeFormat("tr-TR").format(item.startTime)}
     </td>
     <td className="hidden lg:table-cell">
       {new Date(item.startTime).toLocaleTimeString('tr-TR', { 

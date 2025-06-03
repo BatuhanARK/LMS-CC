@@ -95,8 +95,9 @@ const ResultForm = ({
         />
 
         <div className="flex flex-col gap-2 w-full md:w-[48%]">
-          <label className="text-xs text-gray-500">Student</label>
+          <label htmlFor="studentId" className="text-xs text-gray-500">Student</label>
           <select
+            id="studentId"
             className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
             {...register("studentId")}
             defaultValue={data?.studentId}
