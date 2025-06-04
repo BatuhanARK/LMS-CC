@@ -1,8 +1,4 @@
-// ! IMPORTANT! 
-// ! ONLY RUN THIS FILE IF THERE IS NO DATA IN THE DATABASE!
-
-
-import { PrismaClient } from '@prisma/client'
+const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient()
 
