@@ -7,8 +7,6 @@ import Pagination from "@/components/Pagination";
 import FormContainer from "@/components/FormContainer";
 import Link from "next/link";
 import { ITEM_PER_PAGE } from "@/lib/settings";
-import { forms } from "@/components/forms";
-import LiveForm from "./LiveForm";
 
 // Row tipi: canlı ders, ilgili ders, sınıf ve öğretmen bilgileriyle
 type LiveList = Live & {
