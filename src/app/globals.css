@@ -51,6 +51,7 @@
 
 .rbc-time-content {
   border: none !important;
+  padding: 10px !important;
 }
 
 .rbc-time-gutter.rbc-time-column {
@@ -69,12 +70,15 @@
   font-size: 14px !important;
 }
 
+.rbc-events-container {
+  width: 100% !important;
+}
+
 .rbc-event {
   border: none !important;
   color: black !important;
-  padding: 10px !important;
-  margin: 10px !important;
-  width: 99% !important;
+  width: 100% !important;
+  z-index: 10 !important;
 }
 
 .rbc-event:nth-child(1) {
@@ -105,4 +109,13 @@
 .rbc-event-label{
   color: gray !important;
   margin-bottom: 5px;
+  padding: 5px !important;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
 }

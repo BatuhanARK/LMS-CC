@@ -73,7 +73,6 @@ export const studentSchema = z.object({
   sex: z.enum(["MALE", "FEMALE"], { message: "Sex is required!" }),
   gradeId: z.coerce.number().min(1, { message: "Grade is required!" }),
   classId: z.coerce.number().min(1, { message: "Class is required!" }),
-  parentId: z.string().min(1, { message: "Parent Id is required!" }),
 });
 
 export type StudentSchema = z.infer<typeof studentSchema>;
@@ -87,3 +86,32 @@ export const examSchema = z.object({
 });
 
 export type ExamSchema = z.infer<typeof examSchema>;
+
+export const eventSchema = z.object({
+  id: z.number().optional(),
+  title: z.string().min(1, "Title is required"),
+  description: z.string().min(1, "Description is required"),
+  startTime: z.string().min(1, "Start time is required"),
+  endTime: z.string().min(1, "End time is required"),
+  targetAudience: z.enum(["ALL", "TEACHERS", "STUDENTS"]),
+  classId: z
+    .union([z.string().min(1), z.literal("")])
+    .optional()
+    .transform((val) => (typeof val !== "string" || val === "" ? null : parseInt(val))),
+});
+
+export type EventSchema = z.infer<typeof eventSchema>;
+
+export const announcementSchema = z.object({
+  id: z.number().optional(),
+  title: z.string().min(1, "Title is required"),
+  description: z.string().min(1, "Description is required"),
+  date: z.string().min(1, "Date is required"),
+  targetAudience: z.enum(["ALL", "TEACHERS", "STUDENTS"]),
+  classId: z
+    .union([z.string().min(1), z.literal("")])
+    .optional()
+    .transform((val) => (typeof val !== "string" || val === "" ? null : parseInt(val))),
+});
+
+export type AnnouncementSchema = z.infer<typeof announcementSchema>;

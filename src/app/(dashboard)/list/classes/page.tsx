@@ -53,16 +53,16 @@ const columns = [
 const renderRow = (item: ClassList) => (
   <tr
     key={item.id}
-    className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-lamaPurpleLight"
+    className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-bPurpleLight"
   >
-    <td className="flex items-center gap-4 p-4">{item.name}</td>
-    <td className="hidden md:table-cell">{item.capacity}</td>
-    <td className="hidden md:table-cell">{item.name[0]}</td>
-    <td className="hidden md:table-cell">
+    <td className="flex items-center gap-4 p-4 w-1/4">{item.name}</td>
+    <td className="hidden md:table-cell w-1/5">{item.capacity}</td>
+    <td className="hidden md:table-cell w-1/5">{item.name[0]}</td>
+    <td className="hidden md:table-cell w-1/3">
       {item.supervisor.name + " " + item.supervisor.surname}
     </td>
     <td>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 w-1/5">
         {role === "admin" && (
           <>
             <FormContainer table="class" type="update" data={item} />
@@ -119,10 +119,10 @@ const renderRow = (item: ClassList) => (
         <div className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
           <TableSearch />
           <div className="flex items-center gap-4 self-end">
-            <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
+            <button className="w-8 h-8 flex items-center justify-center rounded-full bg-bYellow">
               <Image src="/filter.png" alt="" width={14} height={14} />
             </button>
-            <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
+            <button className="w-8 h-8 flex items-center justify-center rounded-full bg-bYellow">
               <Image src="/sort.png" alt="" width={14} height={14} />
             </button>
             {role === "admin" && <FormContainer table="class" type="create" />}

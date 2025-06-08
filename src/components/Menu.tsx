@@ -1,6 +1,7 @@
 import { currentUser } from "@clerk/nextjs/server";
 import Image from "next/image";
 import Link from "next/link";
+import LogoutButton from "./LogoutButton";
 
 const menuItems = [
   {
@@ -10,7 +11,14 @@ const menuItems = [
         icon: "/home.png",
         label: "Home",
         href: "/",
-        visible: ["admin", "teacher", "student", "parent"],
+        visible: ["admin", "teacher", "student"],
+      },
+      {
+        icon: "/live.png",
+        label: "Live",
+        href: "/live",
+        visible: ["admin", "teacher", "student"],
+        isDynamic: true,
       },
       {
         icon: "/teacher.png",
@@ -22,12 +30,6 @@ const menuItems = [
         icon: "/student.png",
         label: "Students",
         href: "/list/students",
-        visible: ["admin", "teacher"],
-      },
-      {
-        icon: "/parent.png",
-        label: "Parents",
-        href: "/list/parents",
         visible: ["admin", "teacher"],
       },
       {
@@ -52,43 +54,37 @@ const menuItems = [
         icon: "/exam.png",
         label: "Exams",
         href: "/list/exams",
-        visible: ["admin", "teacher", "student", "parent"],
+        visible: ["admin", "teacher", "student"],
       },
       {
         icon: "/assignment.png",
         label: "Assignments",
         href: "/list/assignments",
-        visible: ["admin", "teacher", "student", "parent"],
+        visible: ["admin", "teacher", "student"],
       },
       {
         icon: "/result.png",
         label: "Results",
         href: "/list/results",
-        visible: ["admin", "teacher", "student", "parent"],
+        visible: ["admin", "teacher", "student"],
       },
       {
         icon: "/attendance.png",
-        label: "Attendance",
-        href: "/list/attendance",
-        visible: ["admin", "teacher", "student", "parent"],
+        label: "Attendances",
+        href: "/list/attendances",
+        visible: ["admin", "teacher", "student"],
       },
       {
         icon: "/calendar.png",
         label: "Events",
         href: "/list/events",
-        visible: ["admin", "teacher", "student", "parent"],
-      },
-      {
-        icon: "/message.png",
-        label: "Messages",
-        href: "/list/messages",
-        visible: ["admin", "teacher", "student", "parent"],
+        visible: ["admin", "teacher", "student"],
       },
       {
         icon: "/announcement.png",
         label: "Announcements",
         href: "/list/announcements",
-        visible: ["admin", "teacher", "student", "parent"],
+        visible: ["admin", "teacher", "student"],
       },
     ],
   },
@@ -99,20 +95,15 @@ const menuItems = [
         icon: "/profile.png",
         label: "Profile",
         href: "/profile",
-        visible: ["admin", "teacher", "student", "parent"],
+        visible: ["teacher", "student"],
       },
       {
         icon: "/setting.png",
         label: "Settings",
-        href: "/settings",
-        visible: ["admin", "teacher", "student", "parent"],
+        href: "/list/settings",
+        visible: ["admin", "teacher", "student"],
       },
-      {
-        icon: "/logout.png",
-        label: "Logout",
-        href: "/logout",
-        visible: ["admin", "teacher", "student", "parent"],
-      },
+      // Logout item'ı kaldırıldı, aşağıda ayrı component olarak eklenecek
     ],
   },
 ];
@@ -120,20 +111,37 @@ const menuItems = [
 const Menu = async () => {
   const user = await currentUser();
   const role = user?.publicMetadata.role as string;
+  const userId = user?.id;
+  
   return (
-    <div className="mt-4 text-sm">
-      {menuItems.map((i) => (
+    <div className="mt-4 text-sm h-full overflow-y-auto scrollbar-hide">
+      {menuItems.map((i, index) => (
         <div className="flex flex-col gap-2" key={i.title}>
-          <span className="hidden lg:block text-gray-400 font-light my-4">
-            {i.title}
-          </span>
+          {/* OTHER bölümü için ayırıcı çizgi ekle */}
+          {index === 1 && (
+            <div className="border-t border-gray-300 mb-2 mt-3 mx-2"></div>
+          )}
           {i.items.map((item) => {
             if (item.visible.includes(role)) {
+              // Dinamik href hesaplama
+              let href = item.href;
+              
+              if (item.label === "Profile") {
+                if (role === "teacher") {
+                  href = `/list/teachers/${userId}`;
+                } else if (role === "student") {
+                  href = `/list/students/${userId}`;
+                }
+              } else if (item.label === "Live" && item.isDynamic) {
+                href = `/list/live`;
+              }
+
+              
               return (
                 <Link
-                  href={item.href}
+                  href={href}
                   key={item.label}
-                  className="flex items-center justify-center lg:justify-start gap-4 text-gray-500 py-2 md:px-2 rounded-md hover:bg-lamaSkyLight"
+                  className="flex items-center justify-center lg:justify-start gap-4 text-gray-500 py-2 md:px-2 rounded-md hover:bg-bSkyLight"
                 >
                   <Image src={item.icon} alt="" width={20} height={20} />
                   <span className="hidden lg:block">{item.label}</span>
@@ -143,6 +151,11 @@ const Menu = async () => {
           })}
         </div>
       ))}
+      
+      {/* Logout Button - Ayrı component olarak */}
+      <div className="mt-2 mb-[5px]">
+        <LogoutButton />
+      </div>
     </div>
   );
 };

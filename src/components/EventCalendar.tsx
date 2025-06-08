@@ -10,7 +10,7 @@ type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 const EventCalendar = () => {
-  const [value, onChange] = useState<Value>(new Date());
+  const [value, setValue] = useState<Value>(new Date());
 
   const router = useRouter();
 
@@ -20,7 +20,7 @@ const EventCalendar = () => {
     }
   }, [value, router]);
 
-  return <Calendar onChange={onChange} value={value} />;
+  return <Calendar onChange={setValue} value={value} />;
 };
 
 export default EventCalendar;

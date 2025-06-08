@@ -59,18 +59,18 @@ const StudentListPage = async ({
   const renderRow = (item: StudentList) => (
     <tr
       key={item.id}
-      className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-lamaPurpleLight"
+      className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-bPurpleLight"
     >
       <td className="flex items-center gap-4 p-4">
         <Image
-          src={item.img || "/noAvatar.png"}
+          src={item.img ?? "/noAvatar.png"}
           alt=""
           width={40}
           height={40}
           className="md:hidden xl:block w-10 h-10 rounded-full object-cover"
         />
         <div className="flex flex-col">
-          <h3 className="font-semibold">{item.name}</h3>
+          <h3 className="font-semibold">{item.name + " " + item.surname}</h3>
           <p className="text-xs text-gray-500">{item.class.name}</p>
         </div>
       </td>
@@ -81,12 +81,12 @@ const StudentListPage = async ({
       <td>
         <div className="flex items-center gap-2">
           <Link href={`/list/students/${item.id}`}>
-            <button className="w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky">
+            <button className="w-7 h-7 flex items-center justify-center rounded-full bg-bSky">
               <Image src="/view.png" alt="" width={16} height={16} />
             </button>
           </Link>
           {role === "admin" && (
-            // <button className="w-7 h-7 flex items-center justify-center rounded-full bg-lamaPurple">
+            // <button className="w-7 h-7 flex items-center justify-center rounded-full bg-bPurple">
             //   <Image src="/delete.png" alt="" width={16} height={16} />
             // </button>
             <FormContainer table="student" type="delete" id={item.id} />
@@ -147,14 +147,14 @@ const StudentListPage = async ({
         <div className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
           <TableSearch />
           <div className="flex items-center gap-4 self-end">
-            <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
+            <button className="w-8 h-8 flex items-center justify-center rounded-full bg-bYellow">
               <Image src="/filter.png" alt="" width={14} height={14} />
             </button>
-            <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
+            <button className="w-8 h-8 flex items-center justify-center rounded-full bg-bYellow">
               <Image src="/sort.png" alt="" width={14} height={14} />
             </button>
             {role === "admin" && (
-              // <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
+              // <button className="w-8 h-8 flex items-center justify-center rounded-full bg-bYellow">
               //   <Image src="/plus.png" alt="" width={14} height={14} />
               // </button>
               <FormContainer table="student" type="create" />

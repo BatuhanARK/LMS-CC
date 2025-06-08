@@ -80,11 +80,11 @@ const SubjectForm = ({
             hidden
           />
         )}
-        <div className="flex flex-col gap-2 w-full md:w-1/4">
+        <div className="flex flex-col gap-2 w-full md:w-[48%]">
           <label className="text-xs text-gray-500">Teachers</label>
           <select
             multiple
-            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
+            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full h-[34px]"
             {...register("teachers")}
             defaultValue={data?.teachers}
           >

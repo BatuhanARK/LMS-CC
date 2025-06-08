@@ -7,9 +7,16 @@ const AttendanceChartContainer = async () => {
   const dayOfWeek = today.getDay();
   const daysSinceMonday = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
 
+  // Eğer bugün Pazartesi ise ve henüz saat 8 olmadıysa, geçen haftanın Pazartesi'sini al
+  const now = new Date();
   const lastMonday = new Date(today);
-
   lastMonday.setDate(today.getDate() - daysSinceMonday);
+  lastMonday.setHours(8, 0, 0, 0);
+
+  // Eğer hesaplanan tarih gelecekte ise, bir hafta geriye git
+  if (lastMonday > now) {
+    lastMonday.setDate(lastMonday.getDate() - 7);
+  }
 
   const resData = await prisma.attendance.findMany({
     where: {
@@ -23,18 +30,15 @@ const AttendanceChartContainer = async () => {
     },
   });
 
-  // console.log(data)
-
   const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri"];
 
-  const attendanceMap: { [key: string]: { present: number; absent: number } } =
-    {
-      Mon: { present: 0, absent: 0 },
-      Tue: { present: 0, absent: 0 },
-      Wed: { present: 0, absent: 0 },
-      Thu: { present: 0, absent: 0 },
-      Fri: { present: 0, absent: 0 },
-    };
+  const attendanceMap: { [key: string]: { present: number; absent: number } } = {
+    Mon: { present: 0, absent: 0 },
+    Tue: { present: 0, absent: 0 },
+    Wed: { present: 0, absent: 0 },
+    Thu: { present: 0, absent: 0 },
+    Fri: { present: 0, absent: 0 },
+  };
 
   resData.forEach((item) => {
     const itemDate = new Date(item.date);

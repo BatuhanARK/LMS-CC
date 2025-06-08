@@ -75,17 +75,17 @@ const columns = [
 const renderRow = (item: ResultList) => (
   <tr
     key={item.id}
-    className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-lamaPurpleLight"
+    className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-bPurpleLight"
   >
     <td className="flex items-center gap-4 p-4">{item.title}</td>
-    <td>{item.studentName + " " + item.studentName}</td>
+    <td>{item.studentName + " " + item.studentSurname}</td>
     <td className="hidden md:table-cell">{item.score}</td>
     <td className="hidden md:table-cell">
       {item.teacherName + " " + item.teacherSurname}
     </td>
     <td className="hidden md:table-cell">{item.className}</td>
     <td className="hidden md:table-cell">
-      {new Intl.DateTimeFormat("en-US").format(item.startTime)}
+      {new Intl.DateTimeFormat("tr-TR").format(item.startTime)}
     </td>
     <td>
       <div className="flex items-center gap-2">
@@ -143,12 +143,6 @@ const renderRow = (item: ResultList) => (
     case "student":
       query.studentId = currentUserId!;
       break;
-
-    case "parent":
-      query.student = {
-        parentId: currentUserId!,
-      };
-      break;
     default:
       break;
   }
@@ -186,7 +180,7 @@ const renderRow = (item: ResultList) => (
   ]);
 
   const data = dataRes.map((item) => {
-    const assessment = item.exam || item.assignment;
+    const assessment = item.exam ?? item.assignment;
 
     if (!assessment) return null;
 
@@ -213,10 +207,10 @@ const renderRow = (item: ResultList) => (
         <div className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
           <TableSearch />
           <div className="flex items-center gap-4 self-end">
-            <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
+            <button className="w-8 h-8 flex items-center justify-center rounded-full bg-bYellow">
               <Image src="/filter.png" alt="" width={14} height={14} />
             </button>
-            <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
+            <button className="w-8 h-8 flex items-center justify-center rounded-full bg-bYellow">
               <Image src="/sort.png" alt="" width={14} height={14} />
             </button>
             {(role === "admin" || role === "teacher") && (

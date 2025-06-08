@@ -6,6 +6,12 @@ import {
   deleteStudent,
   deleteSubject,
   deleteTeacher,
+  deleteAssignment,
+  deleteLesson,
+  deleteResult,
+  deleteAttendance,
+  deleteEvent,
+  deleteAnnouncement,
 } from "@/lib/actions";
 import dynamic from "next/dynamic";
 import Image from "next/image";
@@ -14,6 +20,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useFormState } from "react-dom";
 import { toast } from "react-toastify";
 import { FormContainerProps } from "./FormContainer";
+import ModalPortal from "./ModalPortal";
 
 const deleteActionMap = {
   subject: deleteSubject,
@@ -21,20 +28,15 @@ const deleteActionMap = {
   teacher: deleteTeacher,
   student: deleteStudent,
   exam: deleteExam,
-// TODO: OTHER DELETE ACTIONS
-  parent: deleteSubject,
-  lesson: deleteSubject,
-  assignment: deleteSubject,
-  result: deleteSubject,
-  attendance: deleteSubject,
-  event: deleteSubject,
-  announcement: deleteSubject,
+  assignment: deleteAssignment,
+  lesson: deleteLesson,
+  result: deleteResult,
+  attendance: deleteAttendance,
+  event: deleteEvent,
+  announcement: deleteAnnouncement,
 };
 
 // USE LAZY LOADING
-
-// import TeacherForm from "./forms/TeacherForm";
-// import StudentForm from "./forms/StudentForm";
 
 const TeacherForm = dynamic(() => import("./forms/TeacherForm"), {
   loading: () => <h1>Loading...</h1>,
@@ -51,6 +53,25 @@ const ClassForm = dynamic(() => import("./forms/ClassForm"), {
 const ExamForm = dynamic(() => import("./forms/ExamForm"), {
   loading: () => <h1>Loading...</h1>,
 });
+const EventForm = dynamic(() => import("./forms/EventForm"), {
+  loading: () => <h1>Loading...</h1>,
+});
+const AnnouncementForm = dynamic(() => import("./forms/AnnouncementForm"), {
+  loading: () => <h1>Loading...</h1>,
+});
+const AssignmentForm = dynamic(() => import("./forms/AssignmentForm"), {
+  loading: () => <h1>Loading...</h1>,
+});
+const LessonForm = dynamic(() => import("./forms/LessonForm"), {
+  loading: () => <h1>Loading...</h1>,
+});
+const ResultForm = dynamic(() => import("./forms/ResultForm"), {
+  loading: () => <h1>Loading...</h1>,
+});
+const AttendanceForm = dynamic(() => import("./forms/AttendanceForm"), {
+  loading: () => <h1>Loading...</h1>,
+});
+
 // TODO: OTHER FORMS
 
 const forms: {
@@ -100,7 +121,54 @@ const forms: {
       setOpen={setOpen}
       relatedData={relatedData}
     />
-    // TODO OTHER LIST ITEMS
+  ),
+  announcement: (setOpen, type, data, relatedData) => (
+    <AnnouncementForm
+    type={type}
+    data={data}
+    setOpen={setOpen}
+    relatedData={relatedData}
+    />
+  ),
+  event: (setOpen, type, data, relatedData) => (
+    <EventForm
+      type={type}
+      data={data}
+      setOpen={setOpen}
+      relatedData={relatedData}
+    />
+  ),
+  assignment: (setOpen, type, data, relatedData) => (
+    <AssignmentForm
+      type={type}
+      data={data}
+      setOpen={setOpen}
+      relatedData={relatedData}
+    />
+  ),
+  lesson: (setOpen, type, data, relatedData) => (
+    <LessonForm
+      type={type}
+      data={data}
+      setOpen={setOpen}
+      relatedData={relatedData}
+    />
+  ),
+  result: (setOpen, type, data, relatedData) => (
+    <ResultForm
+      type={type}
+      data={data}
+      setOpen={setOpen}
+      relatedData={relatedData}
+    />
+  ),
+  attendance: (setOpen, type, data, relatedData) => (
+    <AttendanceForm
+      type={type}
+      data={data}
+      setOpen={setOpen}
+      relatedData={relatedData}
+    />
   ),
 };
 
@@ -114,10 +182,10 @@ const FormModal = ({
   const size = type === "create" ? "w-8 h-8" : "w-7 h-7";
   const bgColor =
     type === "create"
-      ? "bg-lamaYellow"
+      ? "bg-bYellow"
       : type === "update"
-      ? "bg-lamaSky"
-      : "bg-lamaPurple";
+      ? "bg-bSky"
+      : "bg-bPurple";
 
   const [open, setOpen] = useState(false);
 
@@ -163,17 +231,21 @@ const FormModal = ({
         <Image src={`/${type}.png`} alt="" width={16} height={16} />
       </button>
       {open && (
-        <div className="w-screen h-screen absolute left-0 top-0 bg-black bg-opacity-60 z-50 flex items-center justify-center">
-          <div className="bg-white p-4 rounded-md relative w-[90%] md:w-[70%] lg:w-[60%] xl:w-[50%] 2xl:w-[40%]">
-            <Form />
-            <div
-              className="absolute top-4 right-4 cursor-pointer"
-              onClick={() => setOpen(false)}
-            >
-              <Image src="/close.png" alt="" width={14} height={14} />
+        <ModalPortal>
+          <div className="w-screen h-screen fixed left-0 top-0 bg-black bg-opacity-60 z-50 flex items-center justify-center">
+            <div className="bg-white p-4 rounded-md relative w-[90%] md:w-[70%] lg:w-[60%] xl:w-[50%] 2xl:w-[40%] overflow-auto">
+              <Form />
+              <button
+                type="button"
+                className="absolute top-4 right-4 cursor-pointer bg-transparent border-none p-0"
+                onClick={() => setOpen(false)}
+                aria-label="Close modal"
+              >
+                <Image src="/close.png" alt="" width={14} height={14} />
+              </button>
             </div>
           </div>
-        </div>
+        </ModalPortal>
       )}
     </>
   );

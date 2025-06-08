@@ -8,15 +8,11 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import {
   studentSchema,
   StudentSchema,
-  teacherSchema,
-  TeacherSchema,
 } from "@/lib/formValidationSchemas";
 import { useFormState } from "react-dom";
 import {
   createStudent,
-  createTeacher,
   updateStudent,
-  updateTeacher,
 } from "@/lib/actions";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
@@ -70,14 +66,14 @@ const StudentForm = ({
   const { grades, classes } = relatedData;
 
   return (
-    <form className="flex flex-col gap-8" onSubmit={onSubmit}>
+    <form className="flex flex-col gap-4" onSubmit={onSubmit}>
       <h1 className="text-xl font-semibold">
         {type === "create" ? "Create a new student" : "Update the student"}
       </h1>
-      <span className="text-xs text-gray-400 font-medium">
+      <span className="text-xs text-gray-400 font-medium w-[48%] md:w-[48%]">
         Authentication Information
       </span>
-      <div className="flex justify-between flex-wrap gap-4">
+      <div className="flex justify-between flex-wrap gap-4 relative">
         <InputField
           label="Username"
           name="username"
@@ -100,30 +96,31 @@ const StudentForm = ({
           register={register}
           error={errors?.password}
         />
+        <CldUploadWidget
+          uploadPreset="school"
+          onSuccess={(result, { widget }) => {
+            setImg(result.info);
+            widget.close();
+          }}
+        >
+          {({ open }) => {
+            return (
+              <button
+                type="button"
+                className="text-xs pl-2 text-gray-500 flex items-center gap-2 cursor-pointer bg-transparent border-none p-0 w-[48%] md:w-[48%] h-10 rounded-md ring-[1.5px] ring-gray-300 hover:bg-gray-100 transition-all duration-200 absolute bottom-0 right-0"
+                onClick={() => open()}
+              >
+                <Image src="/upload.png" alt="" width={25} height={25} />
+                <span>Upload a photo</span>
+              </button>
+            );
+          }}
+        </CldUploadWidget>
       </div>
-      <span className="text-xs text-gray-400 font-medium">
+      <span className="text-xs text-gray-400 font-medium w-[48%] md:w-[48%]">
         Personal Information
       </span>
-      <CldUploadWidget
-        uploadPreset="school"
-        onSuccess={(result, { widget }) => {
-          setImg(result.info);
-          widget.close();
-        }}
-      >
-        {({ open }) => {
-          return (
-            <div
-              className="text-xs text-gray-500 flex items-center gap-2 cursor-pointer"
-              onClick={() => open()}
-            >
-              <Image src="/upload.png" alt="" width={28} height={28} />
-              <span>Upload a photo</span>
-            </div>
-          );
-        }}
-      </CldUploadWidget>
-      <div className="flex justify-between flex-wrap gap-4">
+      <div className="flex justify-between flex-wrap gap-4 relative">
         <InputField
           label="First Name"
           name="name"
@@ -167,13 +164,6 @@ const StudentForm = ({
           error={errors.birthday}
           type="date"
         />
-        <InputField
-          label="Parent Id"
-          name="parentId"
-          defaultValue={data?.parentId}
-          register={register}
-          error={errors.parentId}
-        />
         {data && (
           <InputField
             label="Id"
@@ -184,10 +174,11 @@ const StudentForm = ({
             hidden
           />
         )}
-        <div className="flex flex-col gap-2 w-full md:w-1/4">
-          <label className="text-xs text-gray-500">Sex</label>
+        <div className="flex flex-col gap-2 w-1/2 md:w-[22%]">
+          <label htmlFor="sex" className="text-xs text-gray-500">Sex</label>
           <select
-            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
+            id="sex"
+            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-[85%]"
             {...register("sex")}
             defaultValue={data?.sex}
           >
@@ -200,9 +191,10 @@ const StudentForm = ({
             </p>
           )}
         </div>
-        <div className="flex flex-col gap-2 w-full md:w-1/4">
-          <label className="text-xs text-gray-500">Grade</label>
+        <div className="flex flex-col gap-2 w-1/2 md:w-[22%]">
+          <label htmlFor="gradeId" className="text-xs text-gray-500">Grade</label>
           <select
+            id="gradeId"
             className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
             {...register("gradeId")}
             defaultValue={data?.gradeId}
@@ -219,9 +211,10 @@ const StudentForm = ({
             </p>
           )}
         </div>
-        <div className="flex flex-col gap-2 w-full md:w-1/4">
-          <label className="text-xs text-gray-500">Class</label>
+        <div className="flex flex-col gap-2 w-1/2 md:w-[48%]">
+          <label htmlFor="classId" className="text-xs text-gray-500">Class</label>
           <select
+            id="classId"
             className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
             {...register("classId")}
             defaultValue={data?.classId}

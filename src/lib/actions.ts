@@ -285,7 +285,6 @@ export const createStudent = async (
         birthday: data.birthday,
         gradeId: data.gradeId,
         classId: data.classId,
-        parentId: data.parentId,
       },
     });
 
@@ -329,8 +328,7 @@ export const updateStudent = async (
         sex: data.sex,
         birthday: data.birthday,
         gradeId: data.gradeId,
-        classId: data.classId,
-        parentId: data.parentId,
+        classId: data.classId
       },
     });
     // revalidatePath("/list/students");
@@ -460,6 +458,414 @@ export const deleteExam = async (
     });
 
     // revalidatePath("/list/subjects");
+    return { success: true, error: false };
+  } catch (err) {
+    console.log(err);
+    return { success: false, error: true };
+  }
+};
+
+// LESSON ACTIONS
+export const createLesson = async (
+  currentState: CurrentState,
+  data: any // LessonSchema tipini formValidationSchemas.ts'e ekleyebilirsiniz
+) => {
+  try {
+    await prisma.lesson.create({
+      data: {
+        name: data.name,
+        day: data.day,
+        startTime: new Date(`1970-01-01T${data.startTime}:00`),
+        endTime: new Date(`1970-01-01T${data.endTime}:00`),
+        subjectId: parseInt(data.subjectId),
+        classId: parseInt(data.classId),
+        teacherId: data.teacherId,
+      },
+    });
+    return { success: true, error: false };
+  } catch (err) {
+    console.log(err);
+    return { success: false, error: true };
+  }
+};
+
+export const updateLesson = async (
+  currentState: CurrentState,
+  data: any
+) => {
+  try {
+    await prisma.lesson.update({
+      where: {
+        id: data.id,
+      },
+      data: {
+        name: data.name,
+        day: data.day,
+        startTime: new Date(`1970-01-01T${data.startTime}:00`),
+        endTime: new Date(`1970-01-01T${data.endTime}:00`),
+        subjectId: parseInt(data.subjectId),
+        classId: parseInt(data.classId),
+        teacherId: data.teacherId,
+      },
+    });
+    return { success: true, error: false };
+  } catch (err) {
+    console.log(err);
+    return { success: false, error: true };
+  }
+};
+
+// ASSIGNMENT ACTIONS
+export const createAssignment = async (
+  currentState: CurrentState,
+  data: any
+) => {
+  try {
+    await prisma.assignment.create({
+      data: {
+        title: data.title,
+        startDate: new Date(data.startDate),
+        dueDate: new Date(data.dueDate),
+        lessonId: parseInt(data.lessonId),
+      },
+    });
+    return { success: true, error: false };
+  } catch (err) {
+    console.log(err);
+    return { success: false, error: true };
+  }
+};
+
+export const updateAssignment = async (
+  currentState: CurrentState,
+  data: any
+) => {
+  try {
+    await prisma.assignment.update({
+      where: {
+        id: data.id,
+      },
+      data: {
+        title: data.title,
+        startDate: new Date(data.startDate),
+        dueDate: new Date(data.dueDate),
+        lessonId: parseInt(data.lessonId),
+      },
+    });
+    return { success: true, error: false };
+  } catch (err) {
+    console.log(err);
+    return { success: false, error: true };
+  }
+};
+
+// RESULT ACTIONS
+export const createResult = async (
+  currentState: CurrentState,
+  data: any
+) => {
+  try {
+    await prisma.result.create({
+      data: {
+        score: parseInt(data.score),
+        examId: data.examId ? parseInt(data.examId) : null,
+        assignmentId: data.assignmentId ? parseInt(data.assignmentId) : null,
+        studentId: data.studentId,
+      },
+    });
+    return { success: true, error: false };
+  } catch (err) {
+    console.log(err);
+    return { success: false, error: true };
+  }
+};
+
+export const updateResult = async (
+  currentState: CurrentState,
+  data: any
+) => {
+  try {
+    await prisma.result.update({
+      where: {
+        id: data.id,
+      },
+      data: {
+        score: parseInt(data.score),
+        examId: data.examId ? parseInt(data.examId) : null,
+        assignmentId: data.assignmentId ? parseInt(data.assignmentId) : null,
+        studentId: data.studentId,
+      },
+    });
+    return { success: true, error: false };
+  } catch (err) {
+    console.log(err);
+    return { success: false, error: true };
+  }
+};
+
+// ATTENDANCE ACTIONS
+export const createAttendance = async (
+  currentState: CurrentState,
+  data: any
+) => {
+  try {
+    await prisma.attendance.create({
+      data: {
+        date: new Date(data.date),
+        present: data.present === "true" || data.present === true,
+        studentId: data.studentId,
+        lessonId: parseInt(data.lessonId),
+      },
+    });
+    return { success: true, error: false };
+  } catch (err) {
+    console.log(err);
+    return { success: false, error: true };
+  }
+};
+
+export const updateAttendance = async (
+  currentState: CurrentState,
+  data: any
+) => {
+  try {
+    await prisma.attendance.update({
+      where: {
+        id: data.id,
+      },
+      data: {
+        date: new Date(data.date),
+        present: data.present === "true" || data.present === true,
+        studentId: data.studentId,
+        lessonId: parseInt(data.lessonId),
+      },
+    });
+    return { success: true, error: false };
+  } catch (err) {
+    console.log(err);
+    return { success: false, error: true };
+  }
+};
+
+export const createEvent = async (
+  currentState: CurrentState,
+  data: any
+) => {
+  try {
+    const startTime = data.startTime ? new Date(data.startTime) : null;
+    const endTime = data.endTime ? new Date(data.endTime) : null;
+    const classId = data.classId ? parseInt(data.classId) : null;
+
+    if (!startTime || isNaN(startTime.getTime()) || !endTime || isNaN(endTime.getTime())) {
+      throw new Error("Invalid date");
+    }
+
+    await prisma.event.create({
+      data: {
+        title: data.title,
+        description: data.description,
+        startTime,
+        endTime,
+        classId,
+      },
+    });
+    return { success: true, error: false };
+  } catch (err) {
+    console.log(err);
+    return { success: false, error: true };
+  }
+};
+
+export const updateEvent = async (
+  currentState: CurrentState,
+  data: any
+) => {
+  try {
+    const startTime = data.startTime ? new Date(data.startTime) : null;
+    const endTime = data.endTime ? new Date(data.endTime) : null;
+    const classId = data.classId ? parseInt(data.classId) : null;
+
+    if (!startTime || isNaN(startTime.getTime()) || !endTime || isNaN(endTime.getTime())) {
+      throw new Error("Invalid date");
+    }
+
+    await prisma.event.update({
+      where: {
+        id: data.id,
+      },
+      data: {
+        title: data.title,
+        description: data.description,
+        startTime,
+        endTime,
+        classId,
+      },
+    });
+    return { success: true, error: false };
+  } catch (err) {
+    console.log(err);
+    return { success: false, error: true };
+  }
+};
+
+export const deleteEvent = async (
+  currentState: CurrentState,
+  data: FormData
+) => {
+  const id = data.get("id") as string;
+  try {
+    await prisma.event.delete({
+      where: {
+        id: parseInt(id),
+      },
+    });
+
+    // revalidatePath("/list/events");
+    return { success: true, error: false };
+  } catch (err) {
+    console.log(err);
+    return { success: false, error: true };
+  }
+};
+
+export const createAnnouncement = async (
+  currentState: CurrentState,
+  data: any
+) => {
+  try {
+    await prisma.announcement.create({
+      data: {
+        title: data.title,
+        description: data.description,
+        date: new Date(data.date),
+        targetAudience: data.targetAudience,
+        classId: data.classId ?? null,
+      },
+    });
+    return { success: true, error: false };
+  } catch (err) {
+    console.log(err);
+    return { success: false, error: true };
+  }
+};
+
+export const updateAnnouncement = async (
+  currentState: CurrentState,
+  data: any
+) => {
+  try {
+    await prisma.announcement.update({
+      where: {
+        id: data.id,
+      },
+      data: {
+        title: data.title,
+        description: data.description,
+        date: new Date(data.date),
+        targetAudience: data.targetAudience,
+        classId: data.classId ?? null,
+      },
+    });
+    return { success: true, error: false };
+  } catch (err) {
+    console.log(err);
+    return { success: false, error: true };
+  }
+};
+
+export const deleteAnnouncement = async (
+  currentState: CurrentState,
+  data: FormData
+) => {
+  const id = data.get("id") as string;
+  try {
+    await prisma.announcement.delete({
+      where: {
+        id: parseInt(id),
+      },
+    });
+
+    // revalidatePath("/list/announcements");
+    return { success: true, error: false };
+  } catch (err) {
+    console.log(err);
+    return { success: false, error: true };
+  }
+};
+
+export const deleteAssignment = async (
+  currentState: CurrentState,
+  data: FormData
+) => {
+  const id = data.get("id") as string;
+  try {
+    await prisma.assignment.delete({
+      where: {
+        id: parseInt(id),
+      },
+    });
+
+    // revalidatePath("/list/assignments");
+    return { success: true, error: false };
+  } catch (err) {
+    console.log(err);
+    return { success: false, error: true };
+  }
+};
+
+export const deleteLesson = async (
+  currentState: CurrentState,
+  data: FormData
+) => {
+  const id = data.get("id") as string;
+  try {
+    await prisma.lesson.delete({
+      where: {
+        id: parseInt(id),
+      },
+    });
+
+    // revalidatePath("/list/lessons");
+    return { success: true, error: false };
+  } catch (err) {
+    console.log(err);
+    return { success: false, error: true };
+  }
+};
+
+export const deleteResult = async (
+  currentState: CurrentState,
+  data: FormData
+) => {
+  const id = data.get("id") as string;
+  try {
+    await prisma.result.delete({
+      where: {
+        id: parseInt(id),
+      },
+    });
+
+    // revalidatePath("/list/results");
+    return { success: true, error: false };
+  } catch (err) {
+    console.log(err);
+    return { success: false, error: true };
+  }
+};
+
+export const deleteAttendance = async (
+  currentState: CurrentState,
+  data: FormData
+) => {
+  const id = data.get("id") as string;
+  try {
+    await prisma.attendance.delete({
+      where: {
+        id: parseInt(id),
+      },
+    });
+
+    // revalidatePath("/list/attendance");
     return { success: true, error: false };
   } catch (err) {
     console.log(err);

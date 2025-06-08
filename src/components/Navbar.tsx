@@ -1,9 +1,26 @@
 import { UserButton } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
 import Image from "next/image";
+import Link from "next/link";
+import prisma from "@/lib/prisma";
 
 const Navbar = async () => {
   const user = await currentUser();
+  
+  // Bugünün announcement'larını kontrol et
+  const today = new Date();
+  const startOfDay = new Date(today.setHours(0, 0, 0, 0));
+  const endOfDay = new Date(today.setHours(23, 59, 59, 999));
+  
+  const todayAnnouncementsCount = await prisma.announcement.count({
+    where: {
+      date: {
+        gte: startOfDay,
+        lte: endOfDay,
+      },
+    },
+  });
+
   return (
     <div className="flex items-center justify-between p-4">
       {/* SEARCH BAR */}
@@ -20,12 +37,14 @@ const Navbar = async () => {
         <div className="bg-white rounded-full w-7 h-7 flex items-center justify-center cursor-pointer">
           <Image src="/message.png" alt="" width={20} height={20} />
         </div>
-        <div className="bg-white rounded-full w-7 h-7 flex items-center justify-center cursor-pointer relative">
+        <Link href="/list/announcements" className="bg-white rounded-full w-7 h-7 flex items-center justify-center cursor-pointer relative">
           <Image src="/announcement.png" alt="" width={20} height={20} />
-          <div className="absolute -top-3 -right-3 w-5 h-5 flex items-center justify-center bg-purple-500 text-white rounded-full text-xs">
-            1
-          </div>
-        </div>
+          {todayAnnouncementsCount > 0 && (
+            <div className="absolute -top-3 -right-3 w-5 h-5 flex items-center justify-center bg-purple-500 text-white rounded-full text-xs">
+              {todayAnnouncementsCount}
+            </div>
+          )}
+        </Link>
         <div className="flex flex-col">
           <span className="text-xs leading-3 font-medium">John Doe</span>
           <span className="text-[10px] text-gray-500 text-right">
