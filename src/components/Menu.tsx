@@ -16,7 +16,7 @@ const menuItems = [
       {
         icon: "/live.png",
         label: "Live",
-        href: "/live",
+        href: "/list/live",
         visible: ["admin", "teacher", "student"],
         isDynamic: true,
       },
@@ -135,8 +135,6 @@ const Menu = async () => {
               } else if (item.label === "Live" && item.isDynamic) {
                 href = `/list/live`;
               }
-
-              
               return (
                 <Link
                   href={href}
